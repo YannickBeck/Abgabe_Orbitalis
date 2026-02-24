@@ -1,0 +1,8 @@
+# Fixed baseline references for reproducible Eigenleistungs-Nachweis
+generated_at_utc=2026-02-24T19:56:42.815149+00:00
+plugin_source=https://github.com/sasabajic/AI-Reply-Assistant-Plugin-for-osTicket
+plugin_ref=v1.0.4
+plugin_commit=1fb008277db4ae0d7dc97df4606f88876bf54e9f
+osticket_source=https://github.com/osTicket/osTicket
+osticket_ref=v1.18.3
+osticket_commit=95e7c601328717409b99ba51ea83e126cb5d7089

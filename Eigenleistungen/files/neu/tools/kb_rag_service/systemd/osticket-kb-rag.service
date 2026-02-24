@@ -1,0 +1,27 @@
+[Unit]
+Description=osTicket KB RAG Service (LlamaIndex + Ollama)
+After=network.target mariadb.service ollama.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/osTicket/tools/kb_rag_service
+Environment=OSTICKET_ROOT=/var/www/osticket
+Environment=OSTICKET_BASE_URL=http://127.0.0.1
+Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
+Environment=OLLAMA_EMBED_MODEL=embeddinggemma:latest
+Environment=RAG_REFRESH_SECONDS=300
+Environment=RAG_MAX_EMBED_CHARS=2400
+Environment=RAG_MIN_CATEGORY_GUIDANCE_CHARS=80
+Environment=RAG_EMBED_BATCH_SIZE=4
+Environment=RAG_EMBED_TIMEOUT_SECONDS=120
+ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 8099
+Restart=always
+RestartSec=3
+TimeoutStartSec=30
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

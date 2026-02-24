@@ -1,0 +1,82 @@
+[
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "Outlook startet nicht – Profil reparieren / neu erstellen",
+    "keywords": "outlook,profil,startet nicht,office",
+    "answer_html": "<p><b>Symptom:</b> Outlook öffnet sich nicht oder bleibt beim Laden hängen.</p><ol><li>Outlook schließen (auch im Task-Manager prüfen).</li><li>Systemsteuerung → <i>Mail</i> → <i>Profile anzeigen</i>.</li><li>Neues Profil anlegen und als Standard setzen.</li><li>Outlook starten, Konto erneut verbinden.</li><li>Wenn Add-ins vermutet: Outlook im abgesicherten Modus starten (outlook.exe /safe) und Add-ins deaktivieren.</li></ol><p><b>Hinweis:</b> Bei Exchange/365 werden Postfachdaten neu synchronisiert.</p>",
+    "help_topic": "Microsoft 365 / Outlook",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Identity & Access",
+    "question": "Benutzerkonto gesperrt (AD/Azure AD) – Entsperren und Ursache prüfen",
+    "keywords": "konto gesperrt,ad,azure ad,lockout",
+    "answer_html": "<p><b>Symptom:</b> Anmeldung nicht möglich, Konto gesperrt.</p><ol><li>AD: Benutzer entsperren (ADUC) / Entra: Sign-in Logs prüfen.</li><li>Letzte Fehlversuche und Quelle identifizieren (z.B. altes Handy, gespeicherte Credentials, Outlook/Teams).</li><li>Passwort ggf. zurücksetzen und alte Anmeldedaten auf Endgeräten entfernen.</li><li>Falls wiederkehrend: betroffene Dienste (VPN, WLAN, Mail) nacheinander testen.</li></ol>",
+    "help_topic": "IAM / Benutzerkonto",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Windows Clients",
+    "question": "Windows Update hängt bei 0% / 100% – Standard-Reparatur",
+    "keywords": "windows update,hängt,0%,100%,repair",
+    "answer_html": "<p><b>Kurzanleitung:</b></p><ol><li>Neustart durchführen.</li><li>Genug freien Speicher prüfen (&gt;10 GB).</li><li>Windows Update Problembehandlung ausführen.</li><li>Optional: Update-Cache zurücksetzen (wuauserv/bits stoppen, SoftwareDistribution leeren, Dienste starten).</li><li>Erneut nach Updates suchen.</li></ol>",
+    "help_topic": "Windows / Updates",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Netzwerk",
+    "question": "Kein Zugriff auf Netzlaufwerk / SMB Share – Checkliste",
+    "keywords": "netzlaufwerk,smb,share,zugriff,berechtigung",
+    "answer_html": "<ol><li>VPN/Netzverbindung prüfen (Ping auf Fileserver).</li><li>DNS-Auflösung testen (nslookup).</li><li>Anmeldedaten/gespeicherte Credentials entfernen und neu verbinden.</li><li>Berechtigungen prüfen (Share + NTFS).</li><li>Falls nötig: Laufwerk trennen und neu mappen.</li></ol>",
+    "help_topic": "Netzwerk / Fileserver",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Drucker",
+    "question": "Drucker 'Offline' – schnelle Maßnahmen",
+    "keywords": "drucker,offline,spooler,treiber",
+    "answer_html": "<ol><li>Strom/Netzwerk prüfen, Testseite am Gerät.</li><li>Windows: Druckwarteschlange leeren.</li><li>Druckdienst (Spooler) neu starten.</li><li>Treiber/Port prüfen (TCP/IP, WSD vermeiden wenn möglich).</li><li>Optional: Drucker neu hinzufügen.</li></ol>",
+    "help_topic": "Drucker / Client",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • VPN & Remote",
+    "question": "VPN verbindet nicht – typische Ursachen",
+    "keywords": "vpn,verbindung,client,cert,2fa",
+    "answer_html": "<ol><li>Internetverbindung testen, Uhrzeit/Datum prüfen.</li><li>2FA/MFA Status prüfen (Push/OTP).</li><li>Client-Logs prüfen (Fehlercode).</li><li>Zertifikat/Profil gültig?</li><li>Fallback: anderes Netzwerk testen (Hotspot).</li></ol>",
+    "help_topic": "Remote / VPN",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Collaboration",
+    "question": "Teams: Mikrofon/Kamera funktioniert nicht – Troubleshooting",
+    "keywords": "teams,mikrofon,kamera,audio,permissions",
+    "answer_html": "<ol><li>Windows Datenschutz: Mikrofon/Kamera für Teams erlauben.</li><li>Teams Geräte-Einstellungen prüfen (richtige Ein-/Ausgabe).</li><li>Andere Apps schließen (Zoom, Browser).</li><li>Treiber/Firmware aktualisieren, Neustart.</li><li>Testanruf in Teams durchführen.</li></ol>",
+    "help_topic": "Microsoft 365 / Teams",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "OneDrive synchronisiert nicht – Standardlösung",
+    "keywords": "onedrive,sync,cache,reset",
+    "answer_html": "<ol><li>Statussymbol prüfen (Pause/Fehler).</li><li>Ab- und Anmelden in OneDrive.</li><li>OneDrive Reset (onedrive.exe /reset) und neu starten.</li><li>Konflikte/Dateipfade (&lt; 260 Zeichen) prüfen.</li><li>Storage-Quota prüfen.</li></ol>",
+    "help_topic": "Microsoft 365 / OneDrive",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Security",
+    "question": "BitLocker Wiederherstellungsschlüssel erforderlich – Vorgehen",
+    "keywords": "bitlocker,recovery key,verschlüsselung",
+    "answer_html": "<ol><li>Recovery Key aus Entra/AD oder Microsoft Account abrufen (je nach Setup).</li><li>Ursache prüfen: BIOS/TPM Änderung, Secure Boot, Firmware Update.</li><li>Nach erfolgreichem Boot: BitLocker Status prüfen und ggf. Schutz aus-/einschalten.</li></ol>",
+    "help_topic": "Security / Endpoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Server & Storage",
+    "question": "Serverplatte voll – Sofortmaßnahmen & Prävention",
+    "keywords": "disk full,server,cleanup,logs,temp",
+    "answer_html": "<ol><li>Größte Verzeichnisse identifizieren (Logs, Temp, Dumps).</li><li>Alte Logs rotieren/komprimieren.</li><li>Windows: Datenträgerbereinigung, WinSxS prüfen.</li><li>Monitoring/Alerts konfigurieren (Thresholds).</li></ol>",
+    "help_topic": "Server / Storage",
+    "visibility": "public"
+  }
+]
