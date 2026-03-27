@@ -641,6 +641,109 @@ step9_seed() {
 }
 
 # ---------------------------------------------------------------------------
+# Schritt 9b: AI-Chain End-to-End-Test (RAG → LLM → JSON-Output)
+# ---------------------------------------------------------------------------
+step9b_validate_ai_chain() {
+    step "AI-Chain-Validierung – RAG + LLM + JSON-Output"
+
+    local llm_ok=true
+    local rag_ok=true
+
+    # ── 1. RAG-Query-Test: gibt reference_url zurück? ──
+    info "Teste RAG-Query..."
+    local rag_resp
+    rag_resp=$(curl -s --max-time 10 -X POST "http://127.0.0.1:${RAG_PORT}/query" \
+        -H "Content-Type: application/json" \
+        -d '{"query":"Passwort zurücksetzen Login Fehler","top_k":2}' 2>/dev/null)
+
+    if echo "$rag_resp" | "${VENV_DIR}/bin/python" -c \
+        "import sys,json; d=json.load(sys.stdin); hits=d.get('results',[]); \
+         has_url=any(h.get('reference_url') or h.get('faq_url') for h in hits); \
+         exit(0) if has_url and len(hits)>0 else exit(1)" 2>/dev/null; then
+        local hit_count
+        hit_count=$(echo "$rag_resp" | "${VENV_DIR}/bin/python" -c \
+            "import sys,json; print(len(json.load(sys.stdin).get('results',[])))" 2>/dev/null || echo 0)
+        ok "RAG-Query liefert ${hit_count} Treffer mit Reference-URLs ✓"
+    else
+        warn "RAG-Query liefert keine Reference-URLs – Quellen werden im Ticket leer sein"
+        warn "Prüfe: curl -X POST http://127.0.0.1:${RAG_PORT}/query -H 'Content-Type: application/json' -d '{\"query\":\"test\",\"top_k\":2}'"
+        rag_ok=false
+    fi
+
+    # ── 2. LLM-JSON-Test: gibt gemma3:4b gültiges JSON mit Tags und source_urls aus? ──
+    info "Teste LLM-JSON-Output (${LLM_MODEL})..."
+    info "(Das Modell wird aufgewärmt – kann 30–60 Sekunden dauern...)"
+
+    local test_prompt
+    test_prompt='You MUST respond with ONLY a valid JSON object. No text before or after the JSON. Use exactly this structure:
+{"reply_subject":"...", "reply_body":"...", "need_more_info":false, "questions":[], "suggested_tags":["tag1","tag2"], "source_urls":[], "confidence":0.8}
+Test ticket: User cannot log in. Password reset failed. Tags should be related to login issues.'
+
+    local llm_resp
+    llm_resp=$(curl -s --max-time 90 -X POST "http://127.0.0.1:11434/api/generate" \
+        -H "Content-Type: application/json" \
+        -d "{\"model\":\"${LLM_MODEL}\",\"prompt\":$(echo "$test_prompt" | python3 -c 'import sys,json; print(json.dumps(sys.stdin.read()))'),\"stream\":false}" \
+        2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('response',''))" 2>/dev/null)
+
+    if echo "$llm_resp" | python3 -c "
+import sys, json, re
+text = sys.stdin.read()
+# Try to extract JSON from response
+for attempt in [text, re.sub(r'.*?(\{.*\}).*', r'\1', text, flags=re.DOTALL)]:
+    try:
+        d = json.loads(attempt.strip())
+        tags = d.get('suggested_tags', [])
+        has_body = bool(d.get('reply_body','').strip())
+        if has_body and isinstance(tags, list):
+            if len(tags) > 0:
+                print('tags_ok')
+            else:
+                print('tags_empty')
+            sys.exit(0)
+    except Exception:
+        pass
+sys.exit(1)
+" 2>/dev/null; then
+        local tag_result
+        tag_result=$(echo "$llm_resp" | python3 -c "
+import sys, json, re
+text = sys.stdin.read()
+for attempt in [text, re.sub(r'.*?(\{.*\}).*', r'\1', text, flags=re.DOTALL)]:
+    try:
+        d = json.loads(attempt.strip())
+        tags = d.get('suggested_tags', [])
+        print(','.join(str(t) for t in tags) if tags else '(leer)')
+        break
+    except: pass
+" 2>/dev/null || echo "?")
+        if [[ "$tag_result" == "(leer)" ]]; then
+            warn "LLM gibt gültiges JSON aus, aber suggested_tags ist leer – Tags fehlen im Ticket"
+            warn "Das Modell folgt der Tags-Instruktion nicht zuverlässig (bekannte Einschränkung von ${LLM_MODEL})"
+            llm_ok=false
+        else
+            ok "LLM gibt gültiges JSON aus ✓"
+            ok "  → suggested_tags: ${tag_result}"
+        fi
+    else
+        warn "LLM gibt kein parsbares JSON zurück – Antwortformat nicht garantiert"
+        warn "Rohantwort (erste 300 Zeichen): $(echo "$llm_resp" | head -c 300)"
+        warn "Das kann bei Kaltstart passieren – nach vollständigem Laden des Modells nochmals testen"
+        llm_ok=false
+    fi
+
+    # ── Zusammenfassung ──
+    if $rag_ok && $llm_ok; then
+        ok "AI-Chain vollständig funktionsfähig: RAG ✓ | LLM-JSON ✓ | Tags ✓"
+    else
+        warn "AI-Chain teilweise eingeschränkt – Details oben. Das System läuft, aber:"
+        $rag_ok  || warn "  → RAG liefert keine Reference-URLs → Sources im Ticket leer"
+        $llm_ok  || warn "  → LLM-JSON-Output unzuverlässig   → Tags möglicherweise leer"
+        warn "Empfehlung: Nach vollständigem Modell-Warmup (2–5 Min.) erneut testen:"
+        warn "  curl -X POST http://127.0.0.1:${RAG_PORT}/query -H 'Content-Type: application/json' -d '{\"query\":\"test\",\"top_k\":2}'"
+    fi
+}
+
+# ---------------------------------------------------------------------------
 # Abschluss: Validierung und Zusammenfassung
 # ---------------------------------------------------------------------------
 validate_all() {
@@ -726,15 +829,16 @@ main() {
     prompt_credentials
 
     local TOTAL=9
-    step1_packages;    progress 1 $TOTAL "System-Pakete"
-    step2_ollama;      progress 2 $TOTAL "Ollama"
-    step3_clone;       progress 3 $TOTAL "Repository"
-    step4_database;    progress 4 $TOTAL "Datenbank"
-    step5_deploy;      progress 5 $TOTAL "osTicket bereitstellen"
-    step6_python;      progress 6 $TOTAL "Python-Umgebung"
-    step7_models;      progress 7 $TOTAL "KI-Modelle"
-    step8_rag_service; progress 8 $TOTAL "RAG-Service"
-    step9_seed;        progress 9 $TOTAL "Wissensdatenbank"
+    step1_packages;         progress 1 $TOTAL "System-Pakete"
+    step2_ollama;           progress 2 $TOTAL "Ollama"
+    step3_clone;            progress 3 $TOTAL "Repository"
+    step4_database;         progress 4 $TOTAL "Datenbank"
+    step5_deploy;           progress 5 $TOTAL "osTicket bereitstellen"
+    step6_python;           progress 6 $TOTAL "Python-Umgebung"
+    step7_models;           progress 7 $TOTAL "KI-Modelle"
+    step8_rag_service;      progress 8 $TOTAL "RAG-Service"
+    step9_seed;             progress 9 $TOTAL "Wissensdatenbank"
+    step9b_validate_ai_chain
     validate_all
 }
 

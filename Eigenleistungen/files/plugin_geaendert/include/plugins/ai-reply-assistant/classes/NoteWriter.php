@@ -92,6 +92,7 @@ class AiReplyNoteWriter {
         $needMoreInfo = !empty($replyData['need_more_info']);
         $questions    = isset($replyData['questions']) ? $replyData['questions'] : array();
         $tags         = isset($replyData['suggested_tags']) ? $replyData['suggested_tags'] : array();
+        $sourceUrls   = isset($replyData['source_urls']) ? $replyData['source_urls'] : array();
         $subject      = isset($replyData['reply_subject']) ? $replyData['reply_subject'] : '';
         $body         = isset($replyData['reply_body']) ? $replyData['reply_body'] : '';
 
@@ -143,6 +144,19 @@ class AiReplyNoteWriter {
                 $html .= '<li style="margin: 3px 0;">' . htmlspecialchars($q) . '</li>';
             }
             $html .= '</ol>';
+            $html .= '</div>';
+        }
+
+        // ── Sources (KB Reference URLs extracted by LLM) ──
+        if (!empty($sourceUrls)) {
+            $html .= '<div style="padding: 8px 12px; border-top: 1px solid #eee; font-size: 12px; color: #555;">';
+            $html .= '<strong>📎 Sources:</strong>';
+            $html .= '<ul style="margin: 4px 0 2px 18px; padding: 0;">';
+            foreach ($sourceUrls as $url) {
+                $safeUrl = htmlspecialchars($url);
+                $html .= '<li><a href="' . $safeUrl . '" style="color: #2b6cb0;">' . $safeUrl . '</a></li>';
+            }
+            $html .= '</ul>';
             $html .= '</div>';
         }
 

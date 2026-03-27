@@ -154,9 +154,11 @@ class AiReplyResponseParser {
         if (isset($data['suggested_tags']) && is_array($data['suggested_tags'])) {
             foreach ($data['suggested_tags'] as $tag) {
                 if (is_string($tag) && !empty(trim($tag))) {
-                    // Sanitize tags: lowercase, trim, limit length
+                    // Sanitize: lowercase, replace spaces with hyphens, strip non-alphanumeric
                     $clean = mb_strtolower(trim($tag));
+                    $clean = preg_replace('/\s+/', '-', $clean);
                     $clean = preg_replace('/[^a-z0-9\-_\x{0400}-\x{04FF}]/u', '', $clean);
+                    $clean = trim($clean, '-');
                     if (!empty($clean)) {
                         $tags[] = $clean;
                     }
@@ -166,6 +168,23 @@ class AiReplyResponseParser {
                 }
             }
         }
+
+        // Normalize source_urls (new field – URLs extracted by LLM from KB context)
+        $sourceUrls = array();
+        if (isset($data['source_urls']) && is_array($data['source_urls'])) {
+            foreach ($data['source_urls'] as $url) {
+                if (is_string($url) && !empty(trim($url))
+                    && preg_match('/^https?:\/\//i', trim($url))
+                ) {
+                    $sourceUrls[] = trim($url);
+                }
+            }
+        }
+
+        // Defensive cleanup: strip any empty Sources section the model may have appended
+        $body = preg_replace('/\n{1,2}Sources:\s*$/s', '', $body);
+        $body = preg_replace('/\n{1,2}Quellen:\s*$/s', '', $body);
+        $body = trim($body);
 
         // Normalize confidence
         $confidence = 0.5; // default
@@ -182,6 +201,7 @@ class AiReplyResponseParser {
                 'need_more_info' => $needMoreInfo,
                 'questions'      => $questions,
                 'suggested_tags' => $tags,
+                'source_urls'    => $sourceUrls,
                 'confidence'     => round($confidence, 2),
             ),
             'error'   => null,
