@@ -825,6 +825,16 @@ main() {
     echo "  Log: ${LOG}"
     echo ""
 
+    # curl und git müssen vor preflight verfügbar sein:
+    # preflight() prüft die Internetverbindung via curl und step3_clone nutzt git.
+    # Auf einem frischen Debian 13 sind beide nicht vorinstalliert.
+    if ! command -v curl &>/dev/null || ! command -v git &>/dev/null; then
+        echo "  → Installiere curl und git (für Pre-flight und Repository-Klon benötigt)..."
+        apt-get update -qq >/dev/null 2>&1 || true
+        apt-get install -y -qq curl git \
+            || { echo "FEHLER: curl/git konnten nicht installiert werden. Bitte manuell nachinstallieren."; exit 1; }
+    fi
+
     preflight
     prompt_credentials
 
