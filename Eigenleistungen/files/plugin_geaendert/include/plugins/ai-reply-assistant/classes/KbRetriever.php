@@ -21,7 +21,7 @@
 class AiReplyKbRetriever {
 
     /** Maximum characters per KB article body */
-    const MAX_ARTICLE_BODY = 500;
+    const MAX_ARTICLE_BODY = 1500;
 
     /** Minimum keyword length (characters) to keep */
     const MIN_KEYWORD_LENGTH = 2;
@@ -223,23 +223,23 @@ class AiReplyKbRetriever {
                 $body = mb_substr($body, 0, self::MAX_ARTICLE_BODY) . '...';
             }
 
-            $section .= "Article: \"" . $title . "\"\n";
+            // Differentiate between actual FAQ articles and category-level metadata
+            // so the LLM understands which entries contain specific answers.
+            if ($sourceType === 'category') {
+                $section .= "Category Overview: \"" . $title . "\"\n";
+                $section .= "Note: This is category-level guidance, not a specific FAQ answer.\n";
+            } else {
+                $section .= "--- KB Article ---\n";
+            }
             if (!empty($cat)) {
                 $section .= "Category: " . $cat . "\n";
             }
             if (!empty($topic)) {
                 $section .= "Topic: " . $topic . "\n";
             }
-            if (!empty($sourceType)) {
-                $section .= "Source Type: " . $sourceType . "\n";
-            }
-            if ($faqId > 0) {
-                $section .= "FAQ ID: " . $faqId . "\n";
-            }
-            if ($catId > 0) {
-                $section .= "Category ID: " . $catId . "\n";
-            }
-            $section .= "Score: " . number_format($score, 4, '.', '') . "\n";
+            // Note: Score, Source Type, FAQ ID, Category ID are intentionally
+            // omitted from the LLM context to prevent the model from citing
+            // internal metadata in its response.
             if (!empty($referenceUrl)) {
                 $section .= "Reference URL: " . $referenceUrl . "\n";
             }
@@ -294,11 +294,18 @@ class AiReplyKbRetriever {
             return '';
         }
 
+        $base = $this->getKbReferenceBaseUrl();
+
+        // If URL is already absolute, replace host with configured base if available
+        // (RAG service may return localhost URLs that need rewriting to public domain)
         if (preg_match('/^https?:\/\//i', $url)) {
+            if (!empty($base)) {
+                $path = preg_replace('/^https?:\/\/[^\/]+/', '', $url);
+                return $base . $path;
+            }
             return $url;
         }
 
-        $base = $this->getKbReferenceBaseUrl();
         if (empty($base)) {
             return $url;
         }

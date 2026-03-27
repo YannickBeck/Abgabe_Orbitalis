@@ -99,7 +99,8 @@ RULES:
    Sources:
    - <exact URL used>
 9. Never invent source URLs; only use URLs that appear in the provided context.
-10. If image attachments are provided in the request, use their visual evidence when relevant and mention that you used attachment evidence.{$sensitiveWarning}
+10. In reply_body, do NOT reference knowledge base articles by name or title. Never write phrases like "Laut Artikel ...", "basieren auf dem Artikel ...", "gemäß FAQ ..." or similar. Simply provide the answer directly as your own expert knowledge.
+11. If image attachments are provided in the request, use their visual evidence when relevant and mention that you used attachment evidence.{$sensitiveWarning}
 
 OUTPUT FORMAT:
 You MUST respond with a valid JSON object with exactly this structure:
@@ -115,10 +116,10 @@ You MUST respond with a valid JSON object with exactly this structure:
 FIELD RULES:
 - reply_subject: A brief, relevant subject line (max 100 chars)
 - reply_body: The draft response. Professional, helpful, concise. May include numbered steps.
-  If "Reference URL" values are present in context, append the "Sources:" section at the end.
+  You MUST append a "Sources:" section at the end listing any Reference URLs from the KB context.
 - need_more_info: true if the ticket lacks details for a proper answer
 - questions: Array of 0-3 clarifying questions (only when need_more_info=true)
-- suggested_tags: 0-3 tags that categorize this ticket (e.g., "password-reset", "network")
+- suggested_tags: REQUIRED. Always provide 1-3 tags that categorize this ticket (e.g., "password-reset", "network"). Never leave this empty.
 - confidence: Float 0.0-1.0 — your confidence that reply_body fully addresses the issue
 SYSTEM;
 

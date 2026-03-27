@@ -4,7 +4,6 @@ Lokaler Python-Service für KB-Retrieval via LlamaIndex + Ollama Embeddings.
 
 ## Funktionen
 - Lädt osTicket FAQ/Kategorien/Topics direkt aus MySQL.
-- Indexiert FAQ-Inhalte **und** Kategorie-Leitfäden (`faq_category.description/notes`).
 - Baut beim Start einen Vektorindex.
 - Aktualisiert den Index periodisch (`RAG_REFRESH_SECONDS`, Default 300s).
 - HTTP API:
@@ -36,7 +35,6 @@ python3 -m uvicorn app:app --host 127.0.0.1 --port 8099
 - `RAG_DEFAULT_TOP_K` (Default: `5`)
 - `RAG_MAX_TOP_K` (Default: `8`)
 - `RAG_MAX_EMBED_CHARS` (Default: `2400`, begrenzt große FAQ-Texte für stabilere Embeddings)
-- `RAG_MIN_CATEGORY_GUIDANCE_CHARS` (Default: `80`, Mindestlänge für eigene Kategorie-Guidance-Dokumente)
 - `RAG_EMBED_BATCH_SIZE` (Default: `4`)
 - `RAG_EMBED_TIMEOUT_SECONDS` (Default: `120`)
 

@@ -102,7 +102,6 @@ class AiReplyRagServiceClient {
                 'score'          => (float) ($row['score'] ?? 0),
                 'category'       => trim((string) ($row['category'] ?? '')),
                 'topic'          => trim((string) ($row['topic'] ?? '')),
-                'source_type'    => trim((string) ($row['source_type'] ?? '')),
                 'faq_id'         => (int) ($row['faq_id'] ?? 0),
                 'category_id'    => (int) ($row['category_id'] ?? 0),
                 'category_url'   => trim((string) ($row['category_url'] ?? '')),

@@ -442,6 +442,8 @@ class KBIndexManager:
         self.ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
         self.embed_model_name = os.getenv("OLLAMA_EMBED_MODEL", "embeddinggemma:latest")
         self.max_embed_chars = max(500, int(os.getenv("RAG_MAX_EMBED_CHARS", "2400")))
+        self.answer_snippet_chars = max(200, int(os.getenv("RAG_ANSWER_SNIPPET_CHARS", "1500")))
+        self.include_category_docs = os.getenv("RAG_INCLUDE_CATEGORY_DOCS", "false").lower() == "true"
         self.min_category_guidance_chars = max(
             10, int(os.getenv("RAG_MIN_CATEGORY_GUIDANCE_CHARS", "20"))
         )
@@ -600,7 +602,7 @@ class KBIndexManager:
 
             topics = faq_topics.get(faq_id, [])
             topic_txt = " | ".join(sorted(set(topics))) if topics else ""
-            answer_snippet = answer_embed[:500]
+            answer_snippet = answer_embed[:self.answer_snippet_chars]
 
             chunks = [
                 f"Question: {question_embed}",
@@ -643,7 +645,11 @@ class KBIndexManager:
 
         # Add standalone category guidance docs so category playbooks are retrievable
         # even when FAQ answers are sparse.
-        if layout.cat_id_col and layout.cat_name_col:
+        # NOTE: Disabled by default (RAG_INCLUDE_CATEGORY_DOCS=false) because category
+        # docs compete with FAQ docs for Top-K slots and cause the LLM to receive
+        # category metadata instead of actual FAQ answers. Enable only if FAQ content
+        # is very sparse and category guidance is needed as fallback.
+        if self.include_category_docs and layout.cat_id_col and layout.cat_name_col:
             for cat_id, cat in categories.items():
                 category_name = str(cat.get(layout.cat_name_col) or "").strip()
                 category_guidance = self._build_category_guidance(cat, cat_desc_col, cat_notes_col)
@@ -770,14 +776,30 @@ class KBIndexManager:
         results: List[Dict[str, Any]] = []
         for n in nodes:
             md = getattr(n.node, "metadata", {}) or {}
+            source_type = str(md.get("source_type") or "")
+            score = float(getattr(n, "score", 0.0) or 0.0)
+            faq_id = int(md.get("faq_id") or 0)
+            LOG.debug(
+                "RAG hit: source_type=%s score=%.4f faq_id=%d",
+                source_type or "unknown",
+                score,
+                faq_id,
+            )
+            # Use node text as answer when metadata snippet is shorter than snippet limit.
+            # This ensures the full embedded answer reaches the LLM rather than the
+            # truncated metadata snapshot that was stored at index-build time.
+            meta_snippet = str(md.get("answer_snippet") or "")
+            node_text = str(getattr(n.node, "text", "") or "")
+            answer_snippet = meta_snippet if len(meta_snippet) >= len(node_text) else node_text
+            answer_snippet = answer_snippet[:self.answer_snippet_chars]
             results.append(
                 {
-                    "faq_id": int(md.get("faq_id") or 0),
+                    "faq_id": faq_id,
                     "category_id": int(md.get("category_id") or 0) or None,
-                    "source_type": str(md.get("source_type") or "") or None,
+                    "source_type": source_type or None,
                     "question": str(md.get("question") or ""),
-                    "answer_snippet": str(md.get("answer_snippet") or ""),
-                    "score": float(getattr(n, "score", 0.0) or 0.0),
+                    "answer_snippet": answer_snippet,
+                    "score": score,
                     "category": str(md.get("category") or "") or None,
                     "topic": str(md.get("topic") or "") or None,
                     "category_url": str(md.get("category_url") or "") or None,
