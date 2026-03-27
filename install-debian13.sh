@@ -625,19 +625,50 @@ step9_seed() {
     info "Baue Vektorindex auf..."
     curl -s -X POST "http://127.0.0.1:${RAG_PORT}/reindex" >/dev/null || warn "Reindex-Anfrage fehlgeschlagen – Service prüfen."
 
-    # Warten bis doc_count > 0
-    local retries=15
+    # Warten bis initial_build_complete=true UND doc_count > 0
+    # WICHTIG: doc_count kommt aus der DB und ist sofort > 0 nach dem Seed.
+    # Der Vektor-Index (Embeddings) wird asynchron aufgebaut und kann auf
+    # langsamer Hardware 5–30 Minuten dauern. Wir warten auf initial_build_complete.
+    info "Warte auf Vektorindex-Aufbau (initial_build_complete=true)..."
+    info "Das Einbetten von ${doc_count:-370} Dokumenten dauert je nach Hardware 5–20 Minuten."
+    local index_done=false
+    local retries=45  # max. 7,5 Minuten (45 × 10s)
     for i in $(seq 1 $retries); do
-        local doc_count
-        doc_count=$(curl -s "http://127.0.0.1:${RAG_PORT}/health" 2>/dev/null \
-            | "${VENV_DIR}/bin/python" -c "import sys,json; print(json.load(sys.stdin).get('doc_count',0))" 2>/dev/null || echo 0)
-        if [[ "$doc_count" -gt 0 ]]; then
-            ok "RAG-Index fertig: ${doc_count} Dokumente indexiert"
-            return 0
+        local health_json build_done doc_count
+        health_json=$(curl -s --max-time 5 "http://127.0.0.1:${RAG_PORT}/health" 2>/dev/null)
+        build_done=$(echo "$health_json" \
+            | "${VENV_DIR}/bin/python" -c \
+              "import sys,json; d=json.load(sys.stdin); print('yes' if d.get('initial_build_complete') else 'no')" \
+              2>/dev/null || echo no)
+        doc_count=$(echo "$health_json" \
+            | "${VENV_DIR}/bin/python" -c \
+              "import sys,json; print(json.load(sys.stdin).get('doc_count',0))" \
+              2>/dev/null || echo 0)
+        if [[ "$build_done" == "yes" && "$doc_count" -gt 0 ]]; then
+            ok "Vektorindex fertig: ${doc_count} Dokumente indexiert ✓"
+            index_done=true
+            break
         fi
-        sleep 4
+        info "  Index baut... doc_count=${doc_count}, initial_build_complete=${build_done} (${i}/${retries}, ~$((i*10))s)"
+        sleep 10
     done
-    warn "RAG-Index noch nicht fertig – möglicherweise noch im Aufbau. Prüfen mit: curl http://127.0.0.1:${RAG_PORT}/health"
+    if ! $index_done; then
+        warn "Vektorindex nach 7,5 Min. noch nicht fertig – läuft im Hintergrund weiter."
+        warn "RAG-Queries geben leere Ergebnisse bis der Build abgeschlossen ist."
+        warn "Status prüfen: curl http://127.0.0.1:${RAG_PORT}/health | python3 -m json.tool"
+    fi
+
+    # Embedding-Modell vorladen (Warmup)
+    # Nach dem Index-Build das Modell einmal aufrufen, damit der erste echte
+    # Query aus PHP nicht der erste Ollama-Embedding-Aufruf ist (verhindert Timeout).
+    if $index_done; then
+        info "Lade Embedding-Modell vor (Warmup)..."
+        curl -s --max-time 60 -X POST "http://127.0.0.1:${RAG_PORT}/query" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"Passwort zurücksetzen Login Fehler","top_k":1}' >/dev/null 2>&1 \
+            && ok "Embedding-Modell vorgeladen ✓" \
+            || warn "Warmup-Query fehlgeschlagen – erster Live-Query kann etwas länger dauern"
+    fi
 }
 
 # ---------------------------------------------------------------------------
