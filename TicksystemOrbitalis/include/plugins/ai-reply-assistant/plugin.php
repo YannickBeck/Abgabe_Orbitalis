@@ -20,13 +20,17 @@
 
 return array(
     'id'          => 'ai-reply-assistant',
-    'version'     => '1.0.4',
+    'version'     => '2.0.0',
     'name'        => 'AI Reply Assistant',
-    'author'      => 'Sasa Bajic - BS Computer / BSC IT Solutions',
-    'description' => 'Generates AI-powered draft replies as internal notes using OpenAI. '
-                   . 'Supports PII redaction, department/priority filtering, rate limiting, '
-                   . 'knowledge base integration, and manual AI draft generation. '
-                   . 'Developed by BS Computer (bscomputer.com) & BSC IT Solutions (bscsolutions.rs).',
-    'url'         => 'https://bscomputer.com',
+    'author'      => 'Sasa Bajic - BS Computer / BSC IT Solutions | Erweitert von Team Orbitalis',
+    'description' => 'Generates AI-powered draft replies as internal notes using a local LLM (Ollama). '
+                   . 'Original plugin by BS Computer (bscomputer.com) & BSC IT Solutions (bscsolutions.rs). '
+                   . 'Erweitert und ausgebaut von Team Orbitalis: '
+                   . 'RAG-Integration (semantische Wissenssuche über lokalen Vektor-Index), '
+                   . 'KB-Seeder (automatische Befüllung der Wissensdatenbank), '
+                   . 'PII-Redaktion, Rate-Limiting, strukturiertes Logging, '
+                   . 'JSON-Antwortformat mit source_urls, suggested_tags und confidence-Score, '
+                   . 'vollautomatisches Installations-Skript für Debian 13.',
+    'url'         => 'https://github.com/YannickBeck/Abgabe_Orbitalis',
     'plugin'      => 'class.AiReplyPlugin.php:AiReplyPlugin',
 );

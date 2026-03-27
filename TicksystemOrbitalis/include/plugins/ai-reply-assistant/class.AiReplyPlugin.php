@@ -5,10 +5,18 @@
  * Handles plugin lifecycle: bootstrap, table creation, signal registration.
  * Extends osTicket's Plugin base class.
  *
+ * Ursprünglich entwickelt von Sasa Bajic - BS Computer / BSC IT Solutions.
+ * Erweitert von Team Orbitalis:
+ *   - RAG-Integration (LlamaIndex + Ollama Embeddings über lokalen Vektor-Index)
+ *   - KB-Seeder (automatische Befüllung der Wissensdatenbank mit Demo-Inhalten)
+ *   - PII-Redaktion, Rate-Limiting, strukturiertes Logging
+ *   - JSON-Antwortformat mit source_urls, suggested_tags und confidence-Score
+ *   - Vollautomatisches Installations-Skript für Debian 13
+ *
  * @package    AiReplyAssistant
- * @author     Sasa Bajic - BS Computer / BSC IT Solutions
+ * @author     Sasa Bajic - BS Computer / BSC IT Solutions | Erweitert von Team Orbitalis
  * @link       https://bscomputer.com
- * @link       https://bscsolutions.rs
+ * @link       https://github.com/YannickBeck/Abgabe_Orbitalis
  * @license    GPL-2.0-or-later
  * @copyright  2026 BS Computer / BSC IT Solutions
  */
@@ -29,7 +37,7 @@ require_once __DIR__ . '/classes/RagServiceClient.php';
 class AiReplyPlugin extends Plugin {
 
     /** @var string Plugin version for schema tracking */
-    const VERSION = '1.0.0';
+    const VERSION = '2.0.0';
 
     /** @var string Schema version for migration tracking */
     const SCHEMA_VERSION = '001';
