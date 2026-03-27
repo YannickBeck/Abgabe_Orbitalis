@@ -899,6 +899,14 @@ def reindex():
 def query(req: QueryRequest):
     if not manager:
         raise HTTPException(status_code=503, detail="Service not initialized")
+    if not manager.initial_build_complete:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                f"Vector index not ready yet (doc_count={manager.health().get('doc_count', 0)}). "
+                "The embedding index is still being built. Retry in a few minutes."
+            ),
+        )
     try:
         items = manager.query(req.subject, req.latest_message, req.top_k)
         return {"results": items}
