@@ -8,10 +8,82 @@
     "visibility": "public"
   },
   {
+    "category": "DEMO • Microsoft 365",
+    "question": "OneDrive synchronisiert nicht – Standardlösung",
+    "keywords": "onedrive,sync,cache,reset",
+    "answer_html": "<ol><li>Statussymbol prüfen (Pause/Fehler).</li><li>Ab- und Anmelden in OneDrive.</li><li>OneDrive Reset (onedrive.exe /reset) und neu starten.</li><li>Konflikte/Dateipfade (&lt; 260 Zeichen) prüfen.</li><li>Storage-Quota prüfen.</li></ol>",
+    "help_topic": "Microsoft 365 / OneDrive",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "SharePoint Online: Zugriff verweigert – Berechtigungen prüfen",
+    "keywords": "sharepoint,zugriff verweigert,berechtigung,access denied,site",
+    "answer_html": "<p><b>Symptom:</b> Benutzer erhält 'Zugriff verweigert' auf SharePoint-Seite oder Dokument.</p><ol><li>Seitenbesitzer prüfen und Benutzer zur Seite / Gruppe einladen.</li><li>Entra-Gruppen-Mitgliedschaft prüfen (synchronisiert SharePoint-Berechtigungen).</li><li>Browser-Cache leeren und erneut anmelden.</li><li>Inkognito-Modus testen (schließt Token-Cache-Probleme aus).</li><li>Externe Benutzer: Gasteinladung prüfen (ausstehend/abgelaufen?).</li></ol><p><b>Hinweis:</b> SharePoint-Berechtigungen werden über M365-Gruppen oder direkte Site-Mitgliedschaft vergeben.</p>",
+    "help_topic": "Microsoft 365 / SharePoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "Outlook Kalender synchronisiert nicht mit Teams / Mobile",
+    "keywords": "kalender,sync,teams,mobile,outlook,calendar",
+    "answer_html": "<ol><li>Exchange-Verbindung in Outlook prüfen (Sendestatus unten rechts).</li><li>Outlook neu starten, ggf. Profil-Reparatur (Control Panel → Mail).</li><li>Mobile: E-Mail-Konto entfernen und neu einrichten (Autodiscover).</li><li>Teams: Teams-App abmelden und neu anmelden.</li><li>Benutzer-Lizenzen in M365 Admin prüfen (Exchange + Teams aktiv?).</li></ol>",
+    "help_topic": "Microsoft 365 / Outlook",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "Microsoft 365 Lizenz fehlt oder abgelaufen – Benutzer kann nicht arbeiten",
+    "keywords": "lizenz,license,m365,office,abgelaufen,nicht aktiviert",
+    "answer_html": "<ol><li>M365 Admin Center → Benutzer → Lizenzen prüfen.</li><li>Passende Lizenz zuweisen (E3/E5 oder Business).</li><li>Auf Client: Office neu aktivieren (Datei → Konto → Aktivierung).</li><li>Ggf. Abmelden und neu anmelden erzwingen.</li><li>Bei Lizenzknappheit: ungenutzte Lizenzen identifizieren und umverteilen.</li></ol>",
+    "help_topic": "Microsoft 365 / Outlook",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Microsoft 365",
+    "question": "Teams-Kanal fehlt / erscheint nicht im Client",
+    "keywords": "teams,kanal,fehlt,channel,versteckt,hidden",
+    "answer_html": "<ol><li>In Teams-App: Teams-Liste nach versteckten Kanälen durchsuchen (drei Punkte → Ausgeblendete Kanäle).</li><li>Nutzer als Mitglied des Teams prüfen (Admin Center → Teams).</li><li>Teams-App Cache leeren: %appdata%\\Microsoft\\Teams löschen, neu starten.</li><li>Teams Web-Version testen: teams.microsoft.com.</li><li>Ggf. Teams-App vollständig deinstallieren und neu installieren.</li></ol>",
+    "help_topic": "Microsoft 365 / Teams",
+    "visibility": "public"
+  },
+  {
     "category": "DEMO • Identity & Access",
     "question": "Benutzerkonto gesperrt (AD/Azure AD) – Entsperren und Ursache prüfen",
     "keywords": "konto gesperrt,ad,azure ad,lockout",
     "answer_html": "<p><b>Symptom:</b> Anmeldung nicht möglich, Konto gesperrt.</p><ol><li>AD: Benutzer entsperren (ADUC) / Entra: Sign-in Logs prüfen.</li><li>Letzte Fehlversuche und Quelle identifizieren (z.B. altes Handy, gespeicherte Credentials, Outlook/Teams).</li><li>Passwort ggf. zurücksetzen und alte Anmeldedaten auf Endgeräten entfernen.</li><li>Falls wiederkehrend: betroffene Dienste (VPN, WLAN, Mail) nacheinander testen.</li></ol>",
+    "help_topic": "IAM / Benutzerkonto",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Identity & Access",
+    "question": "Passwort zurücksetzen – Self-Service und Admin-Verfahren",
+    "keywords": "passwort,reset,sspr,self service,kennwort",
+    "answer_html": "<p><b>Self-Service (SSPR):</b></p><ol><li>Benutzer ruft aka.ms/sspr auf.</li><li>Authentifizierung per Handy-App / SMS / E-Mail.</li><li>Neues Passwort vergeben (Komplexitätsregeln beachten).</li></ol><p><b>Admin-Reset (wenn SSPR nicht möglich):</b></p><ol><li>AD: ADUC → Benutzer → Passwort zurücksetzen → 'Muss bei nächster Anmeldung ändern' aktivieren.</li><li>Entra: Admin Center → Benutzer → Passwort zurücksetzen.</li><li>Temporäres Passwort sicher übermitteln (nicht per E-Mail im Klartext).</li></ol>",
+    "help_topic": "IAM / Benutzerkonto",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Identity & Access",
+    "question": "MFA / Zwei-Faktor-Authentifizierung – Einrichten und Probleme lösen",
+    "keywords": "mfa,2fa,authenticator,zwei faktor,microsoft authenticator",
+    "answer_html": "<p><b>Einrichten:</b></p><ol><li>Benutzer ruft aka.ms/mfasetup auf.</li><li>Microsoft Authenticator-App einrichten (QR-Code scannen).</li><li>Backup-Methode (SMS/Rufnummer) hinterlegen.</li></ol><p><b>Problembehandlung:</b></p><ol><li>App zeigt falschen Code: Uhrzeit auf Handy synchronisieren.</li><li>Altes Handy: Admin setzt MFA-Registrierung zurück (Entra → Benutzer → Authentifizierungsmethoden).</li><li>MFA-Aufforderung kommt nicht: Push-Benachrichtigungen für Authenticator-App aktivieren.</li></ol>",
+    "help_topic": "IAM / Benutzerkonto",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Identity & Access",
+    "question": "SSO funktioniert nicht – Anmeldung schlägt fehl (SAML/OAuth)",
+    "keywords": "sso,single sign on,saml,oauth,anmeldung,login,fehler",
+    "answer_html": "<ol><li>Browser-Cache und Cookies löschen, erneut anmelden.</li><li>Anderen Browser / Inkognito testen.</li><li>Entra Sign-in Logs prüfen: Fehlermeldung und Fehlercode notieren.</li><li>App-Registrierung in Entra prüfen: Redirect-URIs, Zertifikat noch gültig?</li><li>SAML: Metadata aktuell? Zertifikat-Rollover durchgeführt?</li><li>Conditional-Access-Richtlinie greift ggf. – prüfen ob IP/Gerät blockiert ist.</li></ol>",
+    "help_topic": "IAM / Benutzerkonto",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Identity & Access",
+    "question": "Neuer Mitarbeiter – Konto anlegen und Onboarding-Checkliste",
+    "keywords": "neuer mitarbeiter,onboarding,konto anlegen,ad,entra,lizenz",
+    "answer_html": "<ol><li>AD/Entra: Benutzerkonto anlegen (Name, UPN, OU, Gruppe).</li><li>M365-Lizenz zuweisen.</li><li>Postfach erstellen (wird automatisch mit Exchange-Lizenz angelegt).</li><li>Gruppen/Verteilerlisten zuweisen.</li><li>MFA-Registrierung erzwingen (mfasetup).</li><li>VPN-Zugang, SharePoint-Berechtigungen, Drucker zuweisen.</li><li>Gerät (Laptop/PC) vorbereiten und in Intune/Domäne einbinden.</li></ol>",
     "help_topic": "IAM / Benutzerkonto",
     "visibility": "public"
   },
@@ -24,10 +96,74 @@
     "visibility": "public"
   },
   {
+    "category": "DEMO • Windows Clients",
+    "question": "Blue Screen (BSOD) – erste Analyse und Maßnahmen",
+    "keywords": "bsod,blue screen,absturz,stop code,minidump",
+    "answer_html": "<p><b>Sofortmaßnahme:</b></p><ol><li>Stop-Code notieren (z.B. IRQL_NOT_LESS_OR_EQUAL, MEMORY_MANAGEMENT).</li><li>Letzten Minidump analysieren: %SystemRoot%\\Minidump → WinDbg oder WhoCrashed.</li><li>Aktuellste Treiber-Updates prüfen (Grafik, Netzwerk, Chipsatz).</li><li>RAM-Test durchführen (Windows Speicherdiagnose / MemTest86).</li><li>Ereignisanzeige (eventvwr.msc) auf kritische Fehler prüfen.</li></ol><p><b>Häufige Ursachen:</b> defekter RAM, veraltete Treiber, Überhitzung, korrupte Systemdateien (sfc /scannow).</p>",
+    "help_topic": "Windows / Updates",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Windows Clients",
+    "question": "Windows langsam / hohe CPU- oder RAM-Auslastung",
+    "keywords": "langsam,performance,cpu,ram,task manager,autostart",
+    "answer_html": "<ol><li>Task-Manager (Strg+Umschalt+Esc) → CPU/RAM/Disk-Tab → auffällige Prozesse identifizieren.</li><li>Autostart bereinigen (Task-Manager → Autostart).</li><li>Festplatte auf Fehler prüfen: chkdsk /f</li><li>SSD: TRIM-Status prüfen, Defragmentierung deaktiviert?</li><li>Antivirus-Scan durchführen.</li><li>Visuelle Effekte reduzieren (Systemsteuerung → Leistungsoptionen).</li></ol>",
+    "help_topic": "Windows / Updates",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Windows Clients",
+    "question": "Software lässt sich nicht deinstallieren – Problembehandlung",
+    "keywords": "deinstallieren,software,entfernen,msi,registry",
+    "answer_html": "<ol><li>Systemsteuerung → Programme → Deinstallieren versuchen.</li><li>Als Administrator ausführen (Rechtsklick auf Installer).</li><li>Revo Uninstaller oder Microsoft Tool zum Entfernen hartnäckiger Software nutzen.</li><li>Dienste und Prozesse der Software vorher beenden (Task-Manager).</li><li>Ggf. Registry-Einträge manuell entfernen (HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall).</li></ol>",
+    "help_topic": "Windows / Updates",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Windows Clients",
+    "question": "Windows Aktivierungsfehler – Lizenz nicht gültig",
+    "keywords": "aktivierung,lizenz,windows,kms,mad activation,product key",
+    "answer_html": "<ol><li>Aktivierungsstatus prüfen: slmgr /xpr</li><li>KMS-Server erreichbar? (Domänennetzwerk, VPN aktiv?)</li><li>Aktivierung neu auslösen: slmgr /ato</li><li>KMS-Server-Adresse prüfen: slmgr /skms [KMS-Server]</li><li>Bei MAK: Produkt-Key erneut eingeben und aktivieren.</li><li>Lizenz im Microsoft VLSC oder M365 Admin prüfen.</li></ol>",
+    "help_topic": "Windows / Updates",
+    "visibility": "public"
+  },
+  {
     "category": "DEMO • Netzwerk",
     "question": "Kein Zugriff auf Netzlaufwerk / SMB Share – Checkliste",
     "keywords": "netzlaufwerk,smb,share,zugriff,berechtigung",
     "answer_html": "<ol><li>VPN/Netzverbindung prüfen (Ping auf Fileserver).</li><li>DNS-Auflösung testen (nslookup).</li><li>Anmeldedaten/gespeicherte Credentials entfernen und neu verbinden.</li><li>Berechtigungen prüfen (Share + NTFS).</li><li>Falls nötig: Laufwerk trennen und neu mappen.</li></ol>",
+    "help_topic": "Netzwerk / Fileserver",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Netzwerk",
+    "question": "WLAN verbindet nicht oder kein Internetzugang trotz Verbindung",
+    "keywords": "wlan,wifi,internet,verbindung,kein internet,ip",
+    "answer_html": "<ol><li>WLAN-Adapter neu starten (Flugmodus an/aus oder Adapter deaktivieren/aktivieren).</li><li>IP-Adresse prüfen: ipconfig – 169.x.x.x bedeutet kein DHCP.</li><li>Netzwerk vergessen und neu verbinden (Passwort eingeben).</li><li>Anderen DNS testen: ipconfig /flushdns</li><li>Netzwerk-Reset: netsh winsock reset, netsh int ip reset, Neustart.</li><li>Router/Access-Point neu starten.</li></ol>",
+    "help_topic": "Netzwerk / Fileserver",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Netzwerk",
+    "question": "IP-Adressenkonflikt im Netzwerk – Diagnose und Behebung",
+    "keywords": "ip konflikt,duplicate ip,dhcp,adresse,konflikt",
+    "answer_html": "<p><b>Symptom:</b> Meldung 'IP-Adressenkonflikt' oder intermittierender Netzwerkausfall.</p><ol><li>ipconfig /release und /renew auf betroffenen Geräten.</li><li>DHCP-Server-Logs prüfen: statische IP-Adressen im DHCP-Bereich?</li><li>Arp -a ausführen – doppelte MAC-Adressen?</li><li>DHCP-Reservierungen für kritische Geräte einrichten.</li><li>Statische IPs außerhalb des DHCP-Pools vergeben.</li></ol>",
+    "help_topic": "Netzwerk / Fileserver",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Netzwerk",
+    "question": "DNS-Auflösung schlägt fehl – Websites / Server nicht erreichbar",
+    "keywords": "dns,auflösung,nslookup,server,erreichbar,host",
+    "answer_html": "<ol><li>nslookup [Hostname] testen – liefert Ergebnis?</li><li>DNS-Server erreichbar: ping [DNS-Server-IP]</li><li>Alternativen DNS testen (z.B. 8.8.8.8 für Internet).</li><li>ipconfig /flushdns ausführen.</li><li>Hosts-Datei prüfen (C:\\Windows\\System32\\drivers\\etc\\hosts).</li><li>VPN-DNS-Split-Konfiguration prüfen (Unternehmensnamen nur intern auflösbar).</li></ol>",
+    "help_topic": "Netzwerk / Fileserver",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Netzwerk",
+    "question": "Firewall blockiert Anwendung – Port freigeben",
+    "keywords": "firewall,port,blockiert,ausnahme,regel,windows firewall",
+    "answer_html": "<ol><li>Windows-Firewall: Systemsteuerung → Windows Defender Firewall → App / Port-Ausnahme hinzufügen.</li><li>Ereignisanzeige: Sicherheitslog auf blockierte Verbindungen prüfen.</li><li>Unternehmens-Firewall: Ticket mit Quell-IP, Ziel-IP, Port, Protokoll an Netzwerkteam.</li><li>Temporär: Firewall deaktivieren zum Testen (nur im sicheren Testnetz).</li><li>Anwendungslog auf Verbindungsfehler prüfen.</li></ol>",
     "help_topic": "Netzwerk / Fileserver",
     "visibility": "public"
   },
@@ -40,10 +176,58 @@
     "visibility": "public"
   },
   {
+    "category": "DEMO • Drucker",
+    "question": "Druckauftrag hängt in der Warteschlange – Spooler-Reset",
+    "keywords": "druckauftrag,warteschlange,hängt,spooler,löschen",
+    "answer_html": "<ol><li>Alle Druckaufträge über Systemsteuerung → Geräte und Drucker löschen.</li><li>Spooler-Dienst stoppen: services.msc → Print Spooler → Stopp.</li><li>Spooler-Verzeichnis leeren: C:\\Windows\\System32\\spool\\PRINTERS (alle Dateien löschen).</li><li>Spooler-Dienst starten.</li><li>Druckauftrag erneut senden.</li></ol>",
+    "help_topic": "Drucker / Client",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Drucker",
+    "question": "Netzwerkdrucker wird nicht angezeigt / GPO-Drucker fehlt",
+    "keywords": "netzwerkdrucker,gpo,gruppenrichtlinie,fehlt,installiert nicht",
+    "answer_html": "<ol><li>Gruppenmitgliedschaft prüfen (Drucker-GPO greift nur für bestimmte Gruppen).</li><li>gpupdate /force ausführen und neu anmelden.</li><li>Ereignisanzeige → Anwendungslog → Gruppenrichtlinienfehler prüfen.</li><li>Druckserver erreichbar? Ping und UNC-Pfad (\\\\Druckserver) testen.</li><li>Treiber auf Druckserver installiert? (Architecture x64/x86)</li></ol>",
+    "help_topic": "Drucker / Client",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Drucker",
+    "question": "Schlechte Druckqualität – Streifen, Flecken, verblichener Druck",
+    "keywords": "druckqualität,streifen,toner,tinte,reinigung,kalibrierung",
+    "answer_html": "<ol><li>Druckkopfreinigung über Drucker-Menü oder Treibersoftware starten.</li><li>Toner/Tinte Füllstand prüfen – ggf. Toner schütteln (Laser).</li><li>Tesseite direkt am Gerät drucken (Hardware-Test).</li><li>Papiertyp korrekt eingestellt?</li><li>Druckköpfe ausrichten (Kalibrierung im Druckermenü).</li><li>Bei Laser: Trommel-Einheit und Toner ggf. ersetzen.</li></ol>",
+    "help_topic": "Drucker / Client",
+    "visibility": "public"
+  },
+  {
     "category": "DEMO • VPN & Remote",
     "question": "VPN verbindet nicht – typische Ursachen",
     "keywords": "vpn,verbindung,client,cert,2fa",
     "answer_html": "<ol><li>Internetverbindung testen, Uhrzeit/Datum prüfen.</li><li>2FA/MFA Status prüfen (Push/OTP).</li><li>Client-Logs prüfen (Fehlercode).</li><li>Zertifikat/Profil gültig?</li><li>Fallback: anderes Netzwerk testen (Hotspot).</li></ol>",
+    "help_topic": "Remote / VPN",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • VPN & Remote",
+    "question": "RDP-Verbindung wird abgelehnt – Remotedesktop Problembehandlung",
+    "keywords": "rdp,remotedesktop,verbindung abgelehnt,port 3389,remote desktop",
+    "answer_html": "<ol><li>Remotedesktop auf Zielrechner aktiviert? (Systemsteuerung → Remote → RDP erlauben)</li><li>Benutzer in der RDP-Gruppe? (Remotedesktopmoteure)</li><li>Port 3389 über Firewall erreichbar?</li><li>NLA (Netzwerkebene-Authentifizierung) – Client aktuell genug?</li><li>Zielrechner läuft und im Netzwerk erreichbar (Ping)?</li><li>Windows-Firewall-Ausnahme für RDP aktiv?</li></ol>",
+    "help_topic": "Remote / VPN",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • VPN & Remote",
+    "question": "Homeoffice: Verbindung über VPN langsam oder instabil",
+    "keywords": "homeoffice,vpn,langsam,instabil,performance,bandwidth",
+    "answer_html": "<ol><li>Internetgeschwindigkeit ohne VPN testen (speedtest.net).</li><li>Kabelverbindung statt WLAN verwenden.</li><li>Router neu starten.</li><li>VPN-Server-Auslastung prüfen (ggf. anderer VPN-Endpoint).</li><li>Split-Tunneling aktivieren (nur Unternehmensverkehr über VPN).</li><li>MTU-Probleme: ping -f -l 1400 [Ziel] – bei Fragmentierung MTU anpassen.</li></ol>",
+    "help_topic": "Remote / VPN",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • VPN & Remote",
+    "question": "VPN-Client lässt sich nicht installieren / startet nicht",
+    "keywords": "vpn client,installation,startet nicht,cisco,anyconnect,globalprotect",
+    "answer_html": "<ol><li>Administratorrechte für Installation prüfen.</li><li>Alten Client vollständig deinstallieren (inkl. Reste in AppData).</li><li>Windows Defender oder Antivirus kurz deaktivieren (verhindert ggf. Installation).</li><li>Aktuellste Version vom IT-Portal herunterladen.</li><li>Systemdienste des VPN-Clients manuell starten (services.msc).</li><li>Neustart nach Installation abwarten.</li></ol>",
     "help_topic": "Remote / VPN",
     "visibility": "public"
   },
@@ -56,11 +240,27 @@
     "visibility": "public"
   },
   {
-    "category": "DEMO • Microsoft 365",
-    "question": "OneDrive synchronisiert nicht – Standardlösung",
-    "keywords": "onedrive,sync,cache,reset",
-    "answer_html": "<ol><li>Statussymbol prüfen (Pause/Fehler).</li><li>Ab- und Anmelden in OneDrive.</li><li>OneDrive Reset (onedrive.exe /reset) und neu starten.</li><li>Konflikte/Dateipfade (&lt; 260 Zeichen) prüfen.</li><li>Storage-Quota prüfen.</li></ol>",
-    "help_topic": "Microsoft 365 / OneDrive",
+    "category": "DEMO • Collaboration",
+    "question": "Teams Meeting: Kein Ton oder Echo – Audiooptimierung",
+    "keywords": "teams,meeting,kein ton,echo,audio,lautsprecher,headset",
+    "answer_html": "<ol><li>Headset/Lautsprecher als Standard-Audiogerät setzen.</li><li>Echo: Lautstärke reduzieren oder Headset verwenden (kein offener Lautsprecher).</li><li>Teams-Rauschunterdrückung aktivieren (Einstellungen → Geräte → Rauschunterdrückung).</li><li>Meeting-Organisator kann Mikrofone der Teilnehmer stummschalten/freigeben.</li><li>Bluetooth-Headset: Verbindung trennen und neu verbinden.</li></ol>",
+    "help_topic": "Microsoft 365 / Teams",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Collaboration",
+    "question": "SharePoint: Dokument kann nicht bearbeitet werden / gesperrt",
+    "keywords": "sharepoint,dokument,gesperrt,check out,bearbeitung,locked",
+    "answer_html": "<ol><li>Dokument-Check-Out prüfen: Bibliothek → Datei → 'Check-In erzwingen' (Admin).</li><li>Anderen Benutzer bitten, das Dokument zu schließen.</li><li>Office: Datei → Details → 'Sperre aufheben' (wenn Co-Authoring aktiv).</li><li>Browser-Version von SharePoint verwenden (umgeht lokale Office-Sperren).</li><li>Berechtigungen prüfen: Nur Lesen oder Mitwirken?</li></ol>",
+    "help_topic": "Microsoft 365 / SharePoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Collaboration",
+    "question": "Teams-Besprechungsaufzeichnung fehlt / kann nicht gefunden werden",
+    "keywords": "teams,aufzeichnung,recording,fehlt,onedrive,sharepoint",
+    "answer_html": "<ol><li>Aufzeichnungen werden in OneDrive des Erstellers oder SharePoint-Kanal gespeichert.</li><li>Teams-Chat der Besprechung prüfen – Link zur Aufzeichnung erscheint dort.</li><li>Ablaufrichtlinie: Aufzeichnungen können automatisch nach X Tagen gelöscht werden (M365 Admin).</li><li>Stream (klassisch) ist abgekündigt – Aufzeichnungen migrieren.</li><li>Admin: Compliance-Center → Content Search nach Aufzeichnung suchen.</li></ol>",
+    "help_topic": "Microsoft 365 / Teams",
     "visibility": "public"
   },
   {
@@ -72,11 +272,187 @@
     "visibility": "public"
   },
   {
+    "category": "DEMO • Security",
+    "question": "Phishing-Mail erhalten – Meldeverfahren und Schutzmaßnahmen",
+    "keywords": "phishing,spam,betrug,malware,link,anhang,melden",
+    "answer_html": "<p><b>Was tun wenn eine Phishing-Mail erhalten wurde?</b></p><ol><li>NICHT auf Links klicken oder Anhänge öffnen.</li><li>Mail als Phishing melden: In Outlook → 'Als Phishing melden' (Microsoft-Button) oder an security@unternehmen.de.</li><li>Wurde ein Link geöffnet: Sofort IT-Security informieren, Passwörter ändern, MFA prüfen.</li><li>Gerät ggf. vom Netzwerk trennen bis zur Prüfung.</li></ol><p><b>Erkennungsmerkmale:</b> Druck, unbekannter Absender, falsche Domain, Grammatikfehler, unerwartete Anhänge.</p>",
+    "help_topic": "Security / Endpoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Security",
+    "question": "Antivirus-Alarm – Fehlalarm oder echte Bedrohung einschätzen",
+    "keywords": "antivirus,alarm,virus,malware,fehlalarm,quarantäne,defender",
+    "answer_html": "<ol><li>Dateiname und Fundort notieren.</li><li>Online prüfen: VirusTotal (virustotal.com) – Datei-Hash hochladen.</li><li>Bekannte Fehlalarme: Entwicklertools, Crack-Software, Custom Scripts → in Whitelist aufnehmen (nach Prüfung).</li><li>Echte Bedrohung: Datei in Quarantäne lassen, IT-Security informieren.</li><li>Vollständigen Systemscan durchführen.</li><li>Defender-Logs: Ereignisanzeige → Microsoft → Windows → Windows Defender.</li></ol>",
+    "help_topic": "Security / Endpoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Security",
+    "question": "USB-Gerät wird blockiert – Ausnahme beantragen",
+    "keywords": "usb,gesperrt,blockiert,policy,gerät,stick,daten",
+    "answer_html": "<ol><li>USB-Blocker ist meist per Gruppenrichtlinie / Endpoint-Security aktiv.</li><li>Ausnahme beantragen: Gerät-ID (Device ID) aus Gerätemanager notieren.</li><li>Anfrage an IT-Security mit Begründung und Gerät-ID.</li><li>Admin kann Whitelist-Ausnahme in GPO / Endpoint-Lösung eintragen.</li><li>Alternative: freigegebener Netzwerkordner oder sichere Cloud-Lösung nutzen.</li></ol>",
+    "help_topic": "Security / Endpoint",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Security",
+    "question": "Verdächtige Software entdeckt – Schritt-für-Schritt Incident-Reaktion",
+    "keywords": "malware,verdächtig,incident,entfernen,infiziert,sicherheit",
+    "answer_html": "<ol><li>Gerät vom Netzwerk trennen (LAN/WLAN).</li><li>IT-Security sofort informieren.</li><li>Kein Neustart (forensische Beweise bleiben im RAM).</li><li>Prozessliste dokumentieren (Task-Manager → Details).</li><li>IT-Security führt forensische Analyse durch und entscheidet über Neuaufbau.</li><li>Passwörter von sauberem Gerät aus ändern.</li><li>Incident dokumentieren für spätere Analyse.</li></ol>",
+    "help_topic": "Security / Endpoint",
+    "visibility": "public"
+  },
+  {
     "category": "DEMO • Server & Storage",
     "question": "Serverplatte voll – Sofortmaßnahmen & Prävention",
     "keywords": "disk full,server,cleanup,logs,temp",
     "answer_html": "<ol><li>Größte Verzeichnisse identifizieren (Logs, Temp, Dumps).</li><li>Alte Logs rotieren/komprimieren.</li><li>Windows: Datenträgerbereinigung, WinSxS prüfen.</li><li>Monitoring/Alerts konfigurieren (Thresholds).</li></ol>",
     "help_topic": "Server / Storage",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Server & Storage",
+    "question": "Backup schlägt fehl – Ursachen und Fehlerbehebung",
+    "keywords": "backup,fehler,sicherung,job,veeam,windows backup",
+    "answer_html": "<ol><li>Backup-Logs prüfen (Fehlercode notieren).</li><li>Speicherplatz auf Backup-Ziel prüfen (voll?).</li><li>Netzwerkverbindung zum Backup-Ziel testen.</li><li>VSS-Fehler: vssadmin list providers / vssadmin list writers – fehlerhafte Writer prüfen.</li><li>Dienste: Windows Backup oder Veeam Backup Service neu starten.</li><li>Alte Backup-Jobs löschen, neuen Job einrichten.</li></ol>",
+    "help_topic": "Server / Storage",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Server & Storage",
+    "question": "RAID-Array degraded – eine Festplatte ausgefallen",
+    "keywords": "raid,degraded,festplatte,platte ausgefallen,storage,rebuild",
+    "answer_html": "<p><b>Sofortmaßnahmen:</b></p><ol><li>RAID-Status über Controller-Webinterface oder Server-Management prüfen.</li><li>Ausgefallene Festplatte identifizieren (Laufwerk-LED, S.M.A.R.T.-Status).</li><li>RAID-Level bestimmen: RAID-1/5/6 – Daten noch verfügbar, kein Neustart nötig.</li><li>Ticket mit HW-Hersteller / Lieferant: Ersatzplatte bestellen (gleiche Spezifikation!).</li><li>Kein RAID-0: sofortiger Datenverlust möglich – sofortige Datensicherung!</li><li>Nach Ersatz: Rebuild-Prozess starten und überwachen.</li></ol>",
+    "help_topic": "Server / Storage",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Server & Storage",
+    "question": "Windows-Dienst startet nicht nach Serverneustart",
+    "keywords": "dienst,service,startet nicht,server,neustart,abhängigkeit",
+    "answer_html": "<ol><li>Ereignisanzeige → System/Anwendung → Fehler zum Startzeitpunkt prüfen.</li><li>services.msc: Starttyp 'Automatisch' gesetzt? Abhängigkeiten erfüllt?</li><li>Dienstkonto: Passwort abgelaufen oder Konto gesperrt?</li><li>Dienst manuell starten und Fehler notieren.</li><li>Abhängige Dienste prüfen (Dienst benötigt z.B. SQL Server, der noch startet).</li><li>Startversögerung einrichten falls Abhängigkeit ein Timing-Problem ist.</li></ol>",
+    "help_topic": "Server / Storage",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Server & Storage",
+    "question": "Serverperformance eingebrochen – Analyse und Diagnose",
+    "keywords": "server,performance,langsam,cpu,ram,disk i/o,last",
+    "answer_html": "<ol><li>Task-Manager / Ressourcenmonitor: CPU, RAM, Disk, Netzwerk beobachten.</li><li>Auffällige Prozesse und Dienste identifizieren.</li><li>Eventlog prüfen: Fehler, Warnungen im Systemlog.</li><li>Disk-I/O: perfmon → Physical Disk → Avg. Disk Queue Length (Wert &gt;2 = Problem).</li><li>Antivirus-Scan läuft im Hintergrund?</li><li>Windows Update oder Indizierung aktiv?</li><li>Hardware-Diagnose: Temperaturen, Festplatten-SMART.</li></ol>",
+    "help_topic": "Server / Storage",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • E-Mail",
+    "question": "E-Mail kommt nicht an – Zustellung prüfen",
+    "keywords": "email,e-mail,kommt nicht an,spam,bounce,delivery,posteingang",
+    "answer_html": "<ol><li>Spam/Junk-Ordner des Empfängers prüfen.</li><li>Absender-Domain auf Blacklists prüfen (mxtoolbox.com).</li><li>Exchange/M365 Admin: Nachrichtenverfolgung starten (Mail Trace).</li><li>NDR (Non-Delivery Report) analysieren – Fehlercode gibt Ursache an.</li><li>Empfängerpostfach voll? Quota prüfen.</li><li>Transport-Regeln in Exchange prüfen (blockiert die Nachricht eine Regel?).</li></ol>",
+    "help_topic": "E-Mail / Exchange",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • E-Mail",
+    "question": "Anhang zu groß – E-Mail nicht zustellbar (Größenlimit)",
+    "keywords": "anhang,email,zu groß,size limit,attachment,large file",
+    "answer_html": "<ol><li>Microsoft 365 Standard-Limit: 25 MB (eingehend) / 150 MB (SharePoint-Link).</li><li>Alternative: Datei über OneDrive/SharePoint teilen, Link per Mail versenden.</li><li>Outlook: 'Dateien anfügen' → 'Als Link teilen' auswählen (OneDrive).</li><li>Admin: Nachrichtenlimit in Exchange Admin Center erhöhen (falls nötig).</li><li>WeTransfer / Fileserver als Alternative für sehr große Dateien.</li></ol>",
+    "help_topic": "E-Mail / Exchange",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • E-Mail",
+    "question": "Automatische Abwesenheitsantwort (Out-of-Office) einrichten",
+    "keywords": "abwesenheit,out of office,automatisch,antwort,urlaub,ooo",
+    "answer_html": "<ol><li>Outlook: Datei → Automatische Antworten (Abwesenheitsassistent).</li><li>Zeitraum festlegen, interne und externe Antwort separat konfigurieren.</li><li>Outlook Web: Einstellungen → Automatische Antworten.</li><li>Exchange Admin (für andere Postfächer): Get-Mailbox → Set-MailboxAutoReplyConfiguration.</li><li>Tipp: Externe Antwort auf allgemeine Info beschränken (kein vollständiger Urlaubs-Zeitraum öffentlich).</li></ol>",
+    "help_topic": "E-Mail / Exchange",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • E-Mail",
+    "question": "Shared Mailbox / Verteilergruppe einbinden und nutzen",
+    "keywords": "shared mailbox,gemeinsames postfach,verteiler,delegierung,exchange",
+    "answer_html": "<p><b>Shared Mailbox einbinden:</b></p><ol><li>Benutzer muss Berechtigungen haben (Exchange Admin → Shared Mailbox → Mitglieder).</li><li>Outlook: Datei → Kontoeinstellungen → E-Mail → Konto ändern → Weitere Einstellungen → Erweitert → Postfach hinzufügen.</li><li>Alternativ: Postfach erscheint automatisch wenn 'Auto-Mapping' aktiv (Exchange-Standard).</li></ol><p><b>Verteiler:</b></p><ol><li>Benutzer muss Mitglied der Verteilergruppe sein (M365 Admin).</li><li>Externe Nachrichten: Verteiler für externe Sender freigeben?</li></ol>",
+    "help_topic": "E-Mail / Exchange",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Hardware",
+    "question": "Monitor zeigt kein Bild – kein Signal",
+    "keywords": "monitor,kein bild,signal,display,schwarz,kabel",
+    "answer_html": "<ol><li>Kabel prüfen (HDMI/DisplayPort/VGA fest eingesteckt).</li><li>Eingangsquelle am Monitor wählen (Menütaste).</li><li>Anderen Kabeltyp / Adapter testen.</li><li>Monitor an anderem PC testen (Monitor defekt?).</li><li>Grafikkarte: Treiber neu installieren, Grafikkarte neu einsetzen.</li><li>BIOS-POST sichtbar? Wenn ja: Windows-Treiberproblem. Wenn nein: Hardware-Problem.</li></ol>",
+    "help_topic": "Hardware / Peripherals",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Hardware",
+    "question": "Laptop-Akku lädt nicht / wird nicht erkannt",
+    "keywords": "akku,batterie,lädt nicht,laptop,power,laden",
+    "answer_html": "<ol><li>Netzteil und Kabel prüfen (Stecker fest, LED am Netzteil leuchtet?).</li><li>Anderen Steckplatz / Steckdose testen.</li><li>Windows: Energieoptionen → Akkuanzeige prüfen (wird Akku erkannt?).</li><li>Treiber: Gerätemanager → Akkus → Microsoft ACPI-konformer Controller → Deinstallieren und neu starten.</li><li>BIOS: Akku kalibrieren (Akku-Reset Funktion in BIOS mancher Hersteller).</li><li>Akkudiagnose: powercfg /batteryreport (Verschleißreport).</li></ol>",
+    "help_topic": "Hardware / Peripherals",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Hardware",
+    "question": "USB-Gerät wird nicht erkannt – Diagnose",
+    "keywords": "usb,nicht erkannt,gerät,treiber,anschluss,stick",
+    "answer_html": "<ol><li>Anderen USB-Port testen (USB 2.0 vs. 3.0 kompatibel?).</li><li>Anderen PC testen (Gerät oder Port defekt?).</li><li>Gerätemanager: Gelbe Ausrufezeichen, Gerät mit Fehler sichtbar?</li><li>Treiber neu installieren oder von Hersteller herunterladen.</li><li>USB Root Hub zurücksetzen: Gerätemanager → USB-Controller → Deinstallieren, Neustart.</li><li>Energieverwaltung: USB-Hub Energieverwaltung deaktivieren (Gerätemanager → Energieverwaltung).</li></ol>",
+    "help_topic": "Hardware / Peripherals",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Hardware",
+    "question": "PC startet nicht – kein POST, keine Reaktion",
+    "keywords": "startet nicht,kein post,kein bild,pc,power,boot",
+    "answer_html": "<ol><li>Stromversorgung prüfen: Kabel, Steckdose, Steckerleiste.</li><li>Netzteil-Schalter auf Rückseite 'I' (ein)?</li><li>RAM neu einsetzen (Module raus und wieder rein).</li><li>Externe Geräte trennen (nur Monitor, Tastatur, Maus).</li><li>CMOS-Reset: Batterien auf Mainboard kurz entfernen.</li><li>Netzteil mit Tester prüfen oder tauschen.</li><li>Piep-Codes beim Start notieren (BIOS POST-Codes).</li></ol>",
+    "help_topic": "Hardware / Peripherals",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Mobile Devices",
+    "question": "Diensthandy: Geschäftliches E-Mail-Konto einrichten (Intune/MDM)",
+    "keywords": "handy,mobile,email,intune,mdm,konfiguration,android,ios",
+    "answer_html": "<p><b>Voraussetzungen:</b> Intune-Lizenz, MDM-Enrollment abgeschlossen.</p><ol><li>iOS: Einstellungen → Allgemein → VPN & Geräteverwaltung → Unternehmensportal.</li><li>Android: Unternehmensportal-App aus Google Play installieren und Enrollment starten.</li><li>E-Mail wird automatisch per Konfigurationsprofil eingerichtet.</li><li>Falls manuell: Exchange-Server = outlook.office365.com, SSL aktiv, Benutzername = E-Mail-Adresse.</li></ol>",
+    "help_topic": "Mobile Devices / MDM",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Mobile Devices",
+    "question": "MDM-Enrollment schlägt fehl – Gerät kann nicht registriert werden",
+    "keywords": "mdm,enrollment,intune,registrierung,fehler,mobile,gerät",
+    "answer_html": "<ol><li>Intune-Lizenz dem Benutzer zugewiesen?</li><li>Enrollment-Beschränkungen prüfen (Gerätelimit, Plattformbeschränkung).</li><li>Apple DEP/Android ZeroTouch: Gerät im Enrollment-Programm registriert?</li><li>Gerät vollständig zurücksetzen und erneut enrollen.</li><li>Intune-Admin: Enrollment-Fehlerprotokoll in Endpoint Manager prüfen.</li><li>Unternehmensportal-App aktuell? Neueste Version installieren.</li></ol>",
+    "help_topic": "Mobile Devices / MDM",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Mobile Devices",
+    "question": "App aus dem Unternehmens-App-Store kann nicht installiert werden",
+    "keywords": "app,unternehmensportal,intune,installieren,fehler,mobile",
+    "answer_html": "<ol><li>Gerät enrollt und Compliance-Richtlinie erfüllt?</li><li>Unternehmensportal-App aktualisieren.</li><li>App-Zuweisung in Intune prüfen: Benutzer / Gruppe als Ziel gesetzt?</li><li>iOS: Vertrauensstellung für Unternehmenszertifikat gesetzt? (Einstellungen → Allgemein → VPN & Geräteverwaltung)</li><li>Android: Unbekannte Quellen erlaubt für verwaltete Apps?</li><li>App-Logs aus Unternehmensportal senden (Hilfe → Protokolle senden).</li></ol>",
+    "help_topic": "Mobile Devices / MDM",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Browser",
+    "question": "Browser öffnet Unternehmenswebseite nicht / Zertifikatsfehler",
+    "keywords": "browser,zertifikat,ssl,tls,fehler,website,https,vertrauen",
+    "answer_html": "<ol><li>Fehlermeldung lesen: NET::ERR_CERT_AUTHORITY_INVALID = Unternehmens-CA nicht vertraut.</li><li>Unternehmens-Stammzertifikat in Windows importieren (certmgr.msc → Vertrauenswürdige Stammzertifizierungsstellen).</li><li>GPO verteilt CA-Zertifikate normalerweise automatisch – gpupdate /force ausführen.</li><li>Systemdatum korrekt? Falsches Datum verursacht Zertifikatsfehler.</li><li>Anderen Browser testen (Edge nutzt Windows-Zertifikatsspeicher, Firefox eigenen).</li></ol>",
+    "help_topic": "Browser / Web",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Browser",
+    "question": "Browser-Erweiterung/Plugin wird durch Unternehmensrichtlinie blockiert",
+    "keywords": "browser,erweiterung,extension,plugin,blockiert,policy,chrome,edge",
+    "answer_html": "<ol><li>Unternehmensrichtlinien steuern Browser-Erweiterungen (Chrome/Edge Enterprise Policy).</li><li>Benötigte Erweiterung bei IT-Abteilung beantragen (Extension-ID und Begründung).</li><li>Admin kann Whitelist in GPO / Intune-Browser-Policy ergänzen.</li><li>Registry-Eintrag prüfen: HKLM\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallWhitelist</li><li>Datenschutzrelevante Erweiterungen werden oft generell blockiert.</li></ol>",
+    "help_topic": "Browser / Web",
+    "visibility": "public"
+  },
+  {
+    "category": "DEMO • Browser",
+    "question": "Webanwendung läuft nur im Internet Explorer / Kompatibilitätsprobleme",
+    "keywords": "internet explorer,ie,kompatibilität,legacy,edge,modus",
+    "answer_html": "<ol><li>Edge Internet Explorer Modus aktivieren: edge://settings/defaultbrowser → IE-Modus.</li><li>Site zur IE-Modus-Liste hinzufügen (Unternehmens-Policy oder manuell).</li><li>GPO: Edge IE-Kompatibilitätsliste zentral verwalten.</li><li>Langfristig: Anwendungsanbieter auf Modernisierung ansprechen (IE End-of-Life!).</li><li>Enterprise Mode Site List XML-Datei für verwaltete IE-Modus-Sites erstellen.</li></ol>",
+    "help_topic": "Browser / Web",
     "visibility": "public"
   }
 ]
