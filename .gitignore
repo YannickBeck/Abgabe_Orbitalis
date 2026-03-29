@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+._.DS_Store
+
+# Claude Code settings
+.claude/
+
+# Secrets
+**/ost-config.php

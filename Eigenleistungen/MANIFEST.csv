@@ -1,0 +1,44 @@
+class,repo_path,source_type,baseline_ref,local_sha256,baseline_sha256,reason
+doku,README.md,local_documentation,,d47b4575c3377e3eb06d2f5f6e010028459f721dfcdd878db3b6a22289250693,,Abgabe-/Projektdokumentation
+doku,README_SEED_KB.md,local_documentation,,91b07dbf9ff1bd08324ab1c91d42e4fb38866fa6959ebf60c09e3d0cdca1b4e0,,Abgabe-/Projektdokumentation
+doku,docs/00_Submission_Overview.md,local_documentation,,d9491a7e3a7e788a026b159d46f69c12e324978d5add7ce0ab8ed63224b41091,,Abgabe-/Projektdokumentation
+doku,docs/01_Repository_Structure.md,local_documentation,,eab473ccdff21c6bd01e35a123c5835c8c56a73801553d9adc68e57341281a3c,,Abgabe-/Projektdokumentation
+doku,docs/02_Architecture_and_Dataflow.md,local_documentation,,9f0fde56a41c0553c4105c807464b3518b862458fb62b653dac5c804e7e2efa4,,Abgabe-/Projektdokumentation
+doku,docs/03_Plugin_Reference.md,local_documentation,,5f3ceffb74ccc08a11cabea41146c4e9d260bc0064e37078f51e495af028af5c,,Abgabe-/Projektdokumentation
+doku,docs/04_RAG_Service_Reference.md,local_documentation,,13d3bd60d186b8f47e5beeec4b5ddda20758843b06f08a489db448bd00ba388e,,Abgabe-/Projektdokumentation
+doku,docs/05_KB_Seeder_Reference.md,local_documentation,,110b18ad5019503d98d65af52b1432211b44a76331eeb9a41db9fb76ad2fabac,,Abgabe-/Projektdokumentation
+doku,docs/06_Config_and_Env_Matrix.md,local_documentation,,207b63b6963c142e7c94ce825acdb607bd426c7c06799db0c9901cca34556f89,,Abgabe-/Projektdokumentation
+doku,docs/07_Deployment_and_Operations.md,local_documentation,,108d51ed0977b3c3d7c907b21c8cfcda68af297cadff4037494ec73a1247c052,,Abgabe-/Projektdokumentation
+doku,docs/08_Testplan_and_Acceptance.md,local_documentation,,7dc133b6876a82ba86c246516b5df6c72be4297d2d6899e7465c0c43ba16c92c,,Abgabe-/Projektdokumentation
+doku,docs/09_Troubleshooting.md,local_documentation,,6672b9a48cf102bc44e7b663bdd06cd540f5e4a2373db5d74e566d2f5c402ed8,,Abgabe-/Projektdokumentation
+doku,docs/10_Security_Privacy_Limits.md,local_documentation,,50cba53df24482b61e87069ae95d84913621d3d20a0cbb17a2e6ac2083c00f48,,Abgabe-/Projektdokumentation
+doku,docs/11_Known_Issues_and_Roadmap.md,local_documentation,,2cc9b2ffd11472fb87407d050e578e48f1872fdf11a0933152eee86147d272ad,,Abgabe-/Projektdokumentation
+doku,docs/12_Database_Handover_Guide.md,local_documentation,,31621bafef699e81e7ff68ffda2aaa1f1c7b38359543914c5aed97c848b18276,,Abgabe-/Projektdokumentation
+doku,docs/REFERENCES.md,local_documentation,,10254c9ab9ca01dffd59aeac97ce02eaa7abd9746a0a36a43a8e86a3eb314b03,,Abgabe-/Projektdokumentation
+neu,exports/ai_reply_log.sql,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,b9b79c6d21c4ff075e9cc0fa0961b9ce821ad4621b6d71183b57f53f99eb0daa,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,exports/kb_export.sql,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,8e667ed80d19cdfceb617a454467c19f15471d643fb185cfc17731f20bce1735,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,exports/osticket_full.sql,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,4231ee1eb26786632f5226f680f7d5efeb05d546081aa950a79570aa3c04bcdf,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,kb_demo.json,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,ee955ccec081175d11379213b82fc4796c206acc22a35fe4ac97405f73586cb1,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,seed_osticket_kb.py,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,c35413b4d7c5b0a7045dc4bd54703c1ac8fefbc67698ac0a689245a1f7bb1471,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,tools/kb_rag_service/README.md,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,ec3a8f50b19a95c382458841cb8c135e648b8d6c633a956c316a8e22b7fdc345,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,tools/kb_rag_service/app.py,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,d27a92d0e9d42cde534f052280bfd86762ad322b51d3db87030f3b5be347a347,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,tools/kb_rag_service/requirements.txt,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,e989639fb21329a6b0a815b9cd8c63d768a54ed799775f9d2c375dfd5a1f2d2d,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+neu,tools/kb_rag_service/systemd/osticket-kb-rag.service,new_file_not_in_baselines,plugin:v1.0.4@1fb008277db4;osticket:v1.18.3@95e7c6013287,7ee562cb3d19f62c15e5adeca59b2753ed3869839bd5a22385f60feff37b80ae,,Datei nicht in Plugin- oder osTicket-Baseline vorhanden
+plugin_geaendert,include/plugins/ai-reply-assistant/.htaccess,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,8bd8c5e3806f57c448ee535ddcb25a9214d62c4f8bf942b9a56db908ea27c45a,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/README_RAG.md,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,66a81531c1c5398c8e34856e7dd8ccc1274562a235f5483df26bc04148c89bbc,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/ajax.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,f4e0269124f6d12f1f337b7fc5af2e66f56a2e4f2ce82c26d2674956d580cadc,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/class.AiReplyPlugin.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,6961513ec5428db30eb4c057b7d199f2f6a1103ca396e6a5b818ab9881cc8beb,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/ContextBuilder.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,7c8240e7f89972ed2555d7a7bfed250cf434e1c34d2d73203bc6938051866d77,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/EventRouter.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,c2f3724950b715678bc30b3dbf400f5b0b6ad3941f87ac573b9259ae74199b5c,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/GatingLogic.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,6736badc3755cc2f6388d27f637bf4b032b985064de1b88cf1e8e9fd46a67b6f,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/KbRetriever.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,ec77931fed8aebb4907680292e517f2b56387d3d45e25f01124ce4c969a91531,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/LogWriter.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,fa1d676ac80050c24d65b4da50e18bf4eedc1c85611498baa5fd79b9d6d86806,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/NoteWriter.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,594a2d566a4ec47aee76ade32c21f387836786841f1368bc2ebdf1628bc14739,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/OpenAiClient.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,5757d40539a4a68ba3c71f4cb5c2e8533b29a79b2987862530a158de866d74fe,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/PiiRedactor.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,533413cb1c02c0054779af0656c351faa076eabb6a0d560b1441e56ea443502b,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/RagServiceClient.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,f3ff24ea0ff8dcfe6a7f9ad0eb7db369e8e170fe687d5bed51265560a3dc3dc9,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/RateLimiter.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,2cff7d0f2d1d06b6d06052cb90b370c433916595d19d8e4303e9630d7b26a7cc,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/classes/ResponseParser.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,3a4e51702389ab6fd92af9b7620d282e7f2cc6f176ba6a7792644100045819af,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/config.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,f4ee2b2a77198ae1c6633a4eb85ddff2b079e8e1bd2a8f49e6a937e3d7977917,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/migrations/001-create-log-table.sql,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,25eb9352776123095a71897a7630d106b09a3fc97e0273c7f41766c0cf40a986,,Plugin-Datei neu gegen Original-Plugin
+plugin_geaendert,include/plugins/ai-reply-assistant/plugin.php,plugin_baseline_diff,sasabajic:v1.0.4@1fb008277db4,b1fde24adb8ae11ac3728832af409f09ab4f4b249392833584161383ff8c12e6,,Plugin-Datei neu gegen Original-Plugin
